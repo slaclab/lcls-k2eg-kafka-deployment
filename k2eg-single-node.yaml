@@ -6,9 +6,9 @@ data:
   k2eg.config: |
     log-level=debug
     cmd-input-topic=k2eg-cmd-topic
-    sub-server-address=lcls-cluster-kafka-bootstrap.kafka:9092
+    sub-server-address=lcls-cluster-kafka-bootstrap:9092
     sub-group-id=eed-k2eg
-    pub-server-address=lcls-cluster-kafka-bootstrap.kafka:9092
+    pub-server-address=lcls-cluster-kafka-bootstrap:9092
     metric-enable=true
 ---
 apiVersion: apps/v1
@@ -31,6 +31,7 @@ spec:
       containers:
       - name: k2eg
         image: ghcr.io/slaclab/k2eg/ubuntu:latest
+        imagePullPolicy: Always
         command: [k2eg]
         args: ['--conf-file', 'yes', '--conf-file-name', '/etc/config/k2eg.config']
         envFrom:

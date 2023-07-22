@@ -9,6 +9,11 @@ resources:
 
 secretGenerator:
   - name: ghcr-io-secret
-    literals:
-      - .dockerconfigjson=<to use vault>
+    files:
+      - .dockerconfigjson
     type: "kubernetes.io/dockerconfigjson"
+
+configMapGenerator:
+- name: epics-config
+  files:
+  - epics.properties
