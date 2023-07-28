@@ -47,7 +47,7 @@ spec:
         ports:
         - containerPort: 8080
       imagePullSecrets:
-      - name: ghcr-io-secret
+      - name: gh-secret
       volumes:
       - name: config-volume
         configMap:

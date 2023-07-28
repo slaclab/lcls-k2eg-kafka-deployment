@@ -6,12 +6,7 @@ resources:
 - operator.yaml
 - cluster.yaml
 - k2eg-single-node.yaml
-
-secretGenerator:
-  - name: ghcr-io-secret
-    files:
-      - .dockerconfigjson
-    type: "kubernetes.io/dockerconfigjson"
+- gh-secret.yaml
 
 configMapGenerator:
 - name: epics-config
