@@ -5,9 +5,9 @@ metadata:
 data:
   k2eg.config: |
     log-level=debug
-    cmd-input-topic=k2eg-cmd-topic
+    cmd-input-topic=lcls-k2eg-cmd-topic
     sub-server-address=lcls-cluster-kafka-bootstrap:9092
-    sub-group-id=eed-k2eg
+    sub-group-id=lcls-k2eg
     pub-server-address=lcls-cluster-kafka-bootstrap:9092
     metric-enable=true
 ---
@@ -15,16 +15,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: k2eg
-  annotations:
-    prometheus.io/scrape: 'true'
-    prometheus.io/path: '/metrics'
-    prometheus.io/port: '8080'
 spec:
   selector:
     matchLabels:
       app: k2eg
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/path: '/metrics'
+        prometheus.io/port: '8080'
       labels:
         app: k2eg
     spec:
