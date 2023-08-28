@@ -36,7 +36,7 @@ spec:
         args: ['--conf-file', 'yes', '--conf-file-name', '/etc/config/k2eg.config']
         envFrom:
         - configMapRef:
-            name: epics-config
+            name: epics-env-config
         volumeMounts:
         - name: config-volume
           mountPath: /etc/config

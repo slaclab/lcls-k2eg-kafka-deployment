@@ -9,6 +9,8 @@ resources:
 - gh-secret.yaml
 
 configMapGenerator:
-- name: epics-config
-  files:
-  - epics.properties
+- name: epics-env-config
+  envs:
+  - epics.env
+generatorOptions:
+  disableNameSuffixHash: true # use a static name
