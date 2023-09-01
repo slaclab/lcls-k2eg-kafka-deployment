@@ -22,6 +22,24 @@ spec:
         port: 9093
         type: internal
         tls: true
+      - name: external
+        port: 9094
+        type: loadbalancer
+        tls: false
+        configuration:
+          bootstrap:
+            annotations:
+              metallb.universe.tf/address-pool: sdf-services
+          brokers:
+            - broker: 0
+              annotations:
+                metallb.universe.tf/address-pool: sdf-services
+            - broker: 1
+              annotations:
+                metallb.universe.tf/address-pool: sdf-services
+            - broker: 2
+              annotations:
+                metallb.universe.tf/address-pool: sdf-services
     readinessProbe:
       initialDelaySeconds: 15
       timeoutSeconds: 5
