@@ -10,7 +10,7 @@ data:
     sub-group-id=lcls-k2eg
     pub-server-address=lcls-cluster-kafka-bootstrap:9092
     metric-enable=true
-    pub-impl-kv=debug:cgrp,topic,fetch,protocol
+    pub-impl-kv=debug:cgrp,topic,fetch
 ---
 apiVersion: apps/v1
 kind: Deployment
