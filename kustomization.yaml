@@ -9,6 +9,8 @@ resources:
 - gh-secret.yaml
 - k2eg-gateway-topics.yaml
 - app-one-topics.yaml
+- app-two-topics.yaml
+- app-three-topics.yaml
 
 configMapGenerator:
 - name: epics-env-config
