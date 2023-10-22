@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
       - name: k2eg
-        image: ghcr.io/slaclab/k2eg/ubuntu:latest
+        image: ghcr.io/slaclab/k2eg/ubuntu:0.0.1
         imagePullPolicy: Always
         command: [k2eg]
         args: ['--conf-file', 'yes', '--conf-file-name', '/etc/config/k2eg.config']
