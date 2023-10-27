@@ -17,6 +17,8 @@ data:
     monitor-worker-cron-schedule=0 */5 * * * *
     nc-monitor-expiration-timeout=3600
     nc-purge-queue-on-exp-timeout=true
+    nc-monitor-consumer-filterout-regex=.*strimzi.*"
+    nc-monitor-consumer-filterout-regex=.*k2eg.*"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
