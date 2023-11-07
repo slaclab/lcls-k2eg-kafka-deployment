@@ -5,12 +5,31 @@ metadata:
 data:
   k2eg.config: |
     log-level=debug
+    storage-path=/data/k2eg-database/k2eg.db
     cmd-input-topic=lcls-k2eg-cmd-topic
     sub-server-address=lcls-cluster-kafka-bootstrap:9092
     sub-group-id=lcls-k2eg
     pub-server-address=lcls-cluster-kafka-bootstrap:9092
     metric-enable=true
-    pub-impl-kv=debug:cgrp,topic,fetch
+    # pub-impl-kv=debug:cgrp,topic,fetch
+    scheduler-check-delay-seconds=60
+    scheduler-thread-number=1
+    monitor-worker-cron-schedule=*/30 * * * * *
+    nc-monitor-expiration-timeout=3600
+    nc-purge-queue-on-exp-timeout=true
+    nc-monitor-consumer-filterout-regex=.*strimzi.*
+    nc-monitor-consumer-filterout-regex=.*k2eg.*
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: k2eg-db-volume
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -41,6 +60,8 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /etc/config
+        - name: k2eg-db-volume
+          mountPath: /data/k2eg-database
         resources:
           limits:
             memory: 512Mi
@@ -53,3 +74,6 @@ spec:
       - name: config-volume
         configMap:
           name: k2eg-config
+      - name:  k2eg-db-volume
+        persistentVolumeClaim:
+          claimName: k2eg-db-volume
