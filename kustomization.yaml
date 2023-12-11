@@ -7,8 +7,10 @@ resources:
 - cluster.yaml
 - k2eg-single-node.yaml
 - gh-secret.yaml
-- k2eg-gateway-topics.yaml
+#- k2eg-gateway-topics.yaml
 - app-one-topics.yaml
+- app-two-topics.yaml
+- app-three-topics.yaml
 
 configMapGenerator:
 - name: epics-env-config
