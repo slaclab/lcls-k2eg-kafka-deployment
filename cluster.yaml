@@ -40,6 +40,23 @@ spec:
             - broker: 2
               annotations:
                 metallb.universe.tf/address-pool: sdf-services
+    template:
+      pod:
+        metadata:
+          annotations:
+            prometheus.io/scrape: true
+            prometheus.io/path: /metrics
+            prometheus.io/port: '9404'
+        affinity:
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                    - key: strimzi.io/name
+                      operator: In
+                      values: [nalms-kafka]
+                topologyKey: kubernetes.io/hostname
+
     readinessProbe:
       initialDelaySeconds: 15
       timeoutSeconds: 5
