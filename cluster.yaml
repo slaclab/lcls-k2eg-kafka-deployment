@@ -58,7 +58,7 @@ spec:
                   matchExpressions:
                     - key: strimzi.io/name
                       operator: In
-                      values: [kafka]
+                      values: [lcls-k2eg]
                 topologyKey: kubernetes.io/hostname
 
     readinessProbe:
