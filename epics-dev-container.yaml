@@ -9,12 +9,27 @@ spec:
   template:
     metadata:
       annotations:
-        prometheus.io/scrape: 'true'
-        prometheus.io/path: '/metrics'
-        prometheus.io/port: '8080'
+        k8s.v1.cni.cncf.io/networks: '[
+                { "name": "sdf-ad-ingest",
+                  "namespace": "multus-system",
+                  "ips": [ "172.24.8.219/24" ],
+                  "gateway": [ "172.24.8.1" ] }
+          ]'
       labels:
         app: epics-dev-container
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: edu.stanford.slac.sdf.k8s.networking.multus
+                operator: In
+                values:
+                - enable
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/ext-load-balancer
       containers:
       - name: epics-dev-container
         image: ghcr.io/epics-containers/epics-base-linux-developer:23.3.1
@@ -26,5 +41,5 @@ spec:
             name: epics-env-config
         resources:
           limits:
-            memory: 512Mi
-            cpu: 1000m
+            memory: 4Gi
+            cpu: 2000m
