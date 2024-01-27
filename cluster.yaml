@@ -40,6 +40,10 @@ spec:
             - broker: 2
               annotations:
                 metallb.universe.tf/address-pool: sdf-services
+    jvmOptions:
+      -XX:
+        UseG1GC: true
+        MaxGCPauseMillis: 20
     template:
       pod:
         metadata:
@@ -54,7 +58,7 @@ spec:
                   matchExpressions:
                     - key: strimzi.io/name
                       operator: In
-                      values: [lcls-k2eg]
+                      values: [lcls-cluster-kafka]
                 topologyKey: kubernetes.io/hostname
 
     readinessProbe:

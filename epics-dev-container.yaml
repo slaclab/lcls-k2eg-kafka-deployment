@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: epics-dev-container
+spec:
+  selector:
+    matchLabels:
+      app: epics-dev-container
+  template:
+    metadata:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: '[
+                { "name": "sdf-ad-ingest",
+                  "namespace": "multus-system",
+                  "ips": [ "172.24.8.219/24" ],
+                  "gateway": [ "172.24.8.1" ] }
+          ]'
+      labels:
+        app: epics-dev-container
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: edu.stanford.slac.sdf.k8s.networking.multus
+                operator: In
+                values:
+                - enable
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/ext-load-balancer
+      containers:
+      - name: epics-dev-container
+        image: ghcr.io/epics-containers/epics-base-linux-developer:23.3.1
+        imagePullPolicy: Always
+        command: [sleep]
+        args: ['infinity']
+        envFrom:
+        - configMapRef:
+            name: epics-env-config
+        resources:
+          limits:
+            memory: 4Gi
+            cpu: 2000m
