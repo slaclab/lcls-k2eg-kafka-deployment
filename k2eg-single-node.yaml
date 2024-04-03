@@ -21,16 +21,16 @@ data:
     nc-monitor-consumer-filterout-regex=.*strimzi.*
     nc-monitor-consumer-filterout-regex=.*k2eg.*
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: k2eg-db-volume
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Gi
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: k2eg-db-volume
+# spec:
+#   accessModes:
+#     - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 1Gi
 ---
 apiVersion: apps/v1
 kind: Deployment

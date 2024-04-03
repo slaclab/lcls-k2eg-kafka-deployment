@@ -4,7 +4,7 @@ metadata:
   name: lcls-cluster
 spec:
   kafka:
-    version: 3.4.0
+    version: 3.6.1
     replicas: 3
     # authorization:
     #   type: simple
@@ -73,9 +73,9 @@ spec:
       transaction.state.log.min.isr: 2
       default.replication.factor: 3
       min.insync.replicas: 2
-      # 100 mbyte
-      message.max.bytes: 104857600 
-      inter.broker.protocol.version: "3.4"
+      # 1000 mbyte
+      message.max.bytes: 1048576000
+      inter.broker.protocol.version: "3.6"
     storage:
       type: jbod
       volumes:
