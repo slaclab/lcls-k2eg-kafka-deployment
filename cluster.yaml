@@ -68,11 +68,11 @@ spec:
       initialDelaySeconds: 15
       timeoutSeconds: 5
     config:
-      offsets.topic.replication.factor: 3
-      transaction.state.log.replication.factor: 3
-      transaction.state.log.min.isr: 2
-      default.replication.factor: 3
-      min.insync.replicas: 2
+      # offsets.topic.replication.factor: 3
+      # transaction.state.log.replication.factor: 1
+      # transaction.state.log.min.isr: 1
+      default.replication.factor: 1
+      # min.insync.replicas: 0
       # 1000 mbyte
       message.max.bytes: 1048576000
       inter.broker.protocol.version: "3.6"
