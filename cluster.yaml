@@ -114,6 +114,12 @@ spec:
     topicRegex: ".*"
     groupRegex: ".*"
   cruiseControl:
+    metricsConfig:
+      type: jmxPrometheusExporter
+      valueFrom:
+        configMapKeyRef:
+          name: cruise-control-metrics
+          key: metrics-config.yml
     config:
       # Note that `goals` must be a superset of `default.goals` and `hard.goals`
       goals: >
@@ -327,3 +333,18 @@ data:
       labels:
         replicaId: "$2"
         memberType: "$3"
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: cruise-control-metrics
+  labels:
+    app: strimzi
+data:
+  metrics-config.yml: |
+    # See https://github.com/prometheus/jmx_exporter for more info about JMX Prometheus Exporter metrics
+    lowercaseOutputName: true
+    rules:
+    - pattern: kafka.cruisecontrol<name=(.+)><>(\w+)
+      name: kafka_cruisecontrol_$1_$2
+      type: GAUGE
