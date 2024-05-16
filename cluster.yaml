@@ -4,7 +4,7 @@ metadata:
   name: lcls-cluster
 spec:
   kafka:
-    version: 3.6.1
+    version: 3.7.0
     replicas: 3
     # authorization:
     #   type: simple
