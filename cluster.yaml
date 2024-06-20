@@ -42,13 +42,13 @@ spec:
                 metallb.universe.tf/address-pool: sdf-services
     jvmOptions:
       -XX:
-        UseG1GC: true
-        MaxGCPauseMillis: 20
+        UseG1GC: "true"
+        MaxGCPauseMillis: "20"
     template:
       pod:
         metadata:
           annotations:
-            prometheus.io/scrape: true
+            prometheus.io/scrape: "true"
             prometheus.io/path: /metrics
             prometheus.io/port: '9404'
         affinity:
@@ -81,7 +81,7 @@ spec:
       volumes:
       - id: 0
         type: persistent-claim
-        size: 100Gi
+        size: 200Gi
         deleteClaim: false
     metricsConfig:
       type: jmxPrometheusExporter
