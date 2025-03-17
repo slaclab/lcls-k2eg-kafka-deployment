@@ -44,7 +44,7 @@ spec:
         key: node-role.kubernetes.io/ext-load-balancer
       containers:
       - name: epics-dev-container
-        image: ghcr.io/epics-containers/epics-base-linux-developer:23.3.1
+        image: ghcr.io/epics-containers/epics-base-runtime:23.3.1
         imagePullPolicy: Always
         command: [sleep]
         args: ['infinity']
