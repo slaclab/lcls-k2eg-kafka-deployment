@@ -20,15 +20,24 @@ data:
     nc-purge-queue-on-exp-timeout=true
     nc-monitor-consumer-filterout-regex=.*strimzi.*
     nc-monitor-consumer-filterout-regex=.*k2eg.*
-    # configuration server
-    configuration-server-host=consul-server
+    configuration-server-host=consul-serv
+---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: k2eg-db-volume
+# spec:
+#   accessModes:
+#     - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 1Gi
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: k2eg
 spec:
-  serviceName: k2eg
   selector:
     matchLabels:
       app: k2eg

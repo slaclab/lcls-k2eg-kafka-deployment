@@ -11,7 +11,8 @@ resources:
 - app-one-topics.yaml
 - app-two-topics.yaml
 - app-three-topics.yaml
-- epics-dev-container.yaml
+# - epics-dev-container.yaml
+- consul.yaml
 
 configMapGenerator:
 - name: epics-env-config
