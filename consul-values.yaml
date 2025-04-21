@@ -1,0 +1,30 @@
+# Configure global settings in this section.
+global:
+  name: consul
+  # Bootstrap ACLs within Consul. This is highly recommended.
+  acls:
+    manageSystemACLs: false
+  # Gossip encryption
+  gossipEncryption:
+    autoGenerate: true
+# Configure your Consul servers in this section.
+server:
+  # Specify three servers that wait until all are healthy to bootstrap the Consul cluster.
+  replicas: 3
+  # Specify the resources that servers request for placement. These values will serve a large environment.
+  resources:
+    requests:
+      memory: '5Gi'
+      cpu: '1'
+    limits:
+      memory: '5Gi'
+      cpu: '1'
+# Enable and configure the Consul UI.
+ui:
+  enabled: true
+# Enable Consul connect pod injection
+connectInject:
+  enabled: false
+  default: false
+controller:
+  enabled: true
