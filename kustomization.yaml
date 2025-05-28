@@ -11,6 +11,7 @@ resources:
 - app-one-topics.yaml
 - app-two-topics.yaml
 - app-three-topics.yaml
+- app-phase-anomaly-detection.yaml
 # - epics-dev-container.yaml
 - consul.yaml
 
