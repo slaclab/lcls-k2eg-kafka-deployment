@@ -1,7 +1,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: app-phase-anomaly-detection
+  name: app-phase-anomaly-detection-reply
   labels:
     strimzi.io/cluster: lcls-cluster
 spec:
