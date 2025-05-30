@@ -42,24 +42,24 @@ spec:
         prometheus.io/scrape: 'true'
         prometheus.io/path: '/metrics'
         prometheus.io/port: '8080'
-        k8s.v1.cni.cncf.io/networks: '[
-                { "name": "sdf-ad-ingest",
-                  "namespace": "multus-system",
-                  "ips": [ "172.24.8.218/24" ],
-                  "gateway": [ "172.24.8.1" ] }
-          ]'
+        # k8s.v1.cni.cncf.io/networks: '[
+        #         { "name": "sdf-ad-ingest",
+        #           "namespace": "multus-system",
+        #           "ips": [ "172.24.8.218/24" ],
+        #           "gateway": [ "172.24.8.1" ] }
+        #   ]'
       labels:
         app: k2eg
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: edu.stanford.slac.sdf.k8s.networking.multus
-                operator: In
-                values:
-                - enable
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: edu.stanford.slac.sdf.k8s.networking.multus
+      #           operator: In
+      #           values:
+      #           - enable
       tolerations:
       - effect: NoSchedule
         key: node-role.kubernetes.io/ext-load-balancer
@@ -75,8 +75,8 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /etc/config
-        # - name: k2eg-db-volume
-        #   mountPath: /data/k2eg-database
+        - name: k2eg-db-volume
+          mountPath: /data/k2eg-database
         resources:
           limits:
             memory: 1Gi
@@ -89,6 +89,11 @@ spec:
       - name: config-volume
         configMap:
           name: k2eg-config
-      # - name:  k2eg-db-volume
-      #   persistentVolumeClaim:
-      #     claimName: k2eg-db-volume
+  volumeClaimTemplates:
+  - metadata:
+      name: k2eg-db-volume
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
