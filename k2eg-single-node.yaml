@@ -75,8 +75,8 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /etc/config
-        - name: k2eg-db-volume
-          mountPath: /data/k2eg-database
+        # - name: k2eg-db-volume
+        #   mountPath: /data/k2eg-database
         resources:
           limits:
             memory: 1Gi
@@ -89,11 +89,11 @@ spec:
       - name: config-volume
         configMap:
           name: k2eg-config
-  volumeClaimTemplates:
-  - metadata:
-      name: k2eg-db-volume
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 1Gi
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: k2eg-db-volume
+  #   spec:
+  #     accessModes: [ "ReadWriteOnce" ]
+  #     resources:
+  #       requests:
+  #         storage: 1Gi
