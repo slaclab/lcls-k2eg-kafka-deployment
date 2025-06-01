@@ -78,9 +78,12 @@ spec:
         # - name: k2eg-db-volume
         #   mountPath: /data/k2eg-database
         resources:
+          requests:
+            memory: 1Gi
+            cpu: 4
           limits:
             memory: 1Gi
-            cpu: 4000m
+            cpu: 4
         ports:
         - containerPort: 8080
       imagePullSecrets:
