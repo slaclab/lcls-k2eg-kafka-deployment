@@ -12,7 +12,7 @@ resources:
 - app-two-topics.yaml
 - app-three-topics.yaml
 - app-phase-anomaly-detection.yaml
-# - epics-dev-container.yaml
+- epics-dev-container.yaml
 - consul.yaml
 
 configMapGenerator:

@@ -20,31 +20,22 @@ spec:
       app: epics-dev-container
   template:
     metadata:
-      annotations:
-        k8s.v1.cni.cncf.io/networks: '[
-                { "name": "sdf-ad-ingest",
-                  "namespace": "multus-system",
-                  "ips": [ "172.24.8.219/24" ],
-                  "gateway": [ "172.24.8.1" ] }
-          ]'
+      # annotations:
+        # k8s.v1.cni.cncf.io/networks: '[
+        #         { "name": "sdf-ad-ingest",
+        #           "namespace": "multus-system",
+        #           "ips": [ "172.24.8.219/24" ],
+        #           "gateway": [ "172.24.8.1" ] }
+        #   ]'
       labels:
         app: epics-dev-container
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: edu.stanford.slac.sdf.k8s.networking.multus
-                operator: In
-                values:
-                - enable
       tolerations:
       - effect: NoSchedule
         key: node-role.kubernetes.io/ext-load-balancer
       containers:
       - name: epics-dev-container
-        image: ghcr.io/epics-containers/epics-base-runtime:23.3.1
+        image: ghcr.io/epics-containers/epics-base-runtime:7.0.8ad3
         imagePullPolicy: Always
         command: [sleep]
         args: ['infinity']
