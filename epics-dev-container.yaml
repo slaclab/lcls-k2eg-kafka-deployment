@@ -20,13 +20,13 @@ spec:
       app: epics-dev-container
   template:
     metadata:
-      # annotations:
-        # k8s.v1.cni.cncf.io/networks: '[
-        #         { "name": "sdf-ad-ingest",
-        #           "namespace": "multus-system",
-        #           "ips": [ "172.24.8.219/24" ],
-        #           "gateway": [ "172.24.8.1" ] }
-        #   ]'
+      annotations:
+        k8s.v1.cni.cncf.io/networks: '[
+                { 
+                "name": "sdf-ad-ingest",
+                "namespace": "multus-system" 
+                }
+          ]'
       labels:
         app: epics-dev-container
     spec:
