@@ -77,10 +77,10 @@ spec:
         #   mountPath: /data/k2eg-database
         resources:
           requests:
-            memory: 1Gi
+            memory: 8Gi
             cpu: 4
           limits:
-            memory: 1Gi
+            memory: 8Gi
             cpu: 4
         ports:
         - containerPort: 8080
