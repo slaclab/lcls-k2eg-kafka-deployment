@@ -44,9 +44,7 @@ spec:
         prometheus.io/port: '8080'
         k8s.v1.cni.cncf.io/networks: '[
                 { "name": "sdf-ad-ingest",
-                  "namespace": "multus-system",
-                  "ips": [ "172.24.8.218/24" ],
-                  "gateway": [ "172.24.8.1" ] }
+                  "namespace": "multus-system"}
           ]'
       labels:
         app: k2eg
