@@ -67,6 +67,11 @@ spec:
         imagePullPolicy: Always
         command: [k2eg]
         args: ['--conf-file', 'yes', '--conf-file-name', '/etc/config/k2eg.config']
+        env:
+        - name: LD_PRELOAD
+          value: /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
+        - name: MALLOC_CONF
+          value: "background_thread:true,dirty_decay_ms:500,muzzy_decay_ms:500,metadata_thp:auto,narenas:4"
         envFrom:
         - configMapRef:
             name: epics-env-config
