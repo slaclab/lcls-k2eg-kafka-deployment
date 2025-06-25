@@ -22,6 +22,8 @@ data:
     nc-purge-queue-on-exp-timeout=true
     nc-monitor-consumer-filterout-regex=.*strimzi.*
     nc-monitor-consumer-filterout-regex=.*k2eg.*
+    # thread number for consume epics data from epics client queue
+    epics-monitor-thread-count=4
     #snapshot
     snapshot-repeating-scheduler-thread=4
     # configuration server
