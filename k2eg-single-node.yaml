@@ -15,7 +15,7 @@ data:
     #publisher
     #pub-impl-kv=debug:cgrp,topic,fetch
     pub-flush-trimeout-ms=100
-    scheduler-check-delay-seconds=60
+    scheduler-check-delay-seconds=5
     scheduler-thread-number=1
     monitor-worker-cron-schedule=*/30 * * * * *
     nc-monitor-expiration-timeout=600
@@ -23,9 +23,9 @@ data:
     nc-monitor-consumer-filterout-regex=.*strimzi.*
     nc-monitor-consumer-filterout-regex=.*k2eg.*
     # thread number for consume epics data from epics client queue
-    epics-monitor-thread-count=4
+    epics-monitor-thread-count=16
     #snapshot
-    snapshot-repeating-scheduler-thread=4
+    snapshot-repeating-scheduler-thread=8
     # configuration server
     configuration-server-host=consul-server
 ---
@@ -84,11 +84,11 @@ spec:
         #   mountPath: /data/k2eg-database
         resources:
           requests:
-            memory: 8Gi
-            cpu: 4
+            memory: 16Gi
+            cpu: 16
           limits:
-            memory: 8Gi
-            cpu: 4
+            memory: 16Gi
+            cpu: 16
         ports:
         - containerPort: 8080
       imagePullSecrets:
