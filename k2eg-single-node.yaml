@@ -38,6 +38,7 @@ spec:
   selector:
     matchLabels:
       app: k2eg
+  replicas: 1
   template:
     metadata:
       annotations:
