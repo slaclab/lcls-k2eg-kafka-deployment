@@ -97,11 +97,11 @@ spec:
         #   mountPath: /data/k2eg-database
         resources:
           requests:
-            memory: 16Gi
-            cpu: 16
+            memory: 8Gi
+            cpu: 8
           limits:
-            memory: 16Gi
-            cpu: 16
+            memory: 8Gi
+            cpu: 8
         ports:
         - containerPort: 8080
       imagePullSecrets:
