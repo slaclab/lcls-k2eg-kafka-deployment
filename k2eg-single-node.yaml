@@ -29,6 +29,16 @@ data:
     # configuration server
     configuration-server-host=consul-server
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k2eg-startup
+data:
+  startup.sh: |
+    #!/bin/sh
+    caRepeater &
+    exec k2eg --conf-file yes --conf-file-name /etc/config/k2eg.config
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -68,8 +78,7 @@ spec:
       - name: k2eg
         image: ghcr.io/slaclab/k2eg/ubuntu:latest
         imagePullPolicy: Always
-        command: [k2eg]
-        args: ['--conf-file', 'yes', '--conf-file-name', '/etc/config/k2eg.config']
+        command: ["/usr/local/bin/startup.sh"]
         env:
         - name: LD_PRELOAD
           value: /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
@@ -81,6 +90,9 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /etc/config
+        - name: startup-volume
+          mountPath: /usr/local/bin/startup.sh
+          subPath: startup.sh
         # - name: k2eg-db-volume
         #   mountPath: /data/k2eg-database
         resources:
@@ -98,11 +110,7 @@ spec:
       - name: config-volume
         configMap:
           name: k2eg-config
-  # volumeClaimTemplates:
-  # - metadata:
-  #     name: k2eg-db-volume
-  #   spec:
-  #     accessModes: [ "ReadWriteOnce" ]
-  #     resources:
-  #       requests:
-  #         storage: 1Gi
+      - name: startup-volume
+        configMap:
+          name: k2eg-startup
+          defaultMode: 0755
