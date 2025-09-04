@@ -14,6 +14,7 @@ resources:
 - app-phase-anomaly-detection.yaml
 - app-phase-anomaly-detection-put.yaml
 - app-test-perf-reply.yaml
+- k2eg-dev-cmd-in-topic.yaml
 - epics-dev-container.yaml
 - consul.yaml
 

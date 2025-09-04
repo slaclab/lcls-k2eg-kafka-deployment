@@ -25,7 +25,7 @@ data:
     # thread number for consume epics data from epics client queue
     epics-monitor-thread-count=16
     #snapshot
-    snapshot-repeating-scheduler-thread=8
+    snapshot-repeating-scheduler-thread=16
     # configuration server
     configuration-server-host=consul-server
 ---
