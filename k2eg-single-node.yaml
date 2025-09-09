@@ -17,7 +17,7 @@ data:
     pub-flush-trimeout-ms=100
     scheduler-check-delay-seconds=5
     scheduler-thread-number=1
-    monitor-worker-cron-schedule=*/30 * * * * *
+    monitor-worker-cron-schedule=* * * * * *
     nc-monitor-expiration-timeout=600
     nc-purge-queue-on-exp-timeout=true
     nc-monitor-consumer-filterout-regex=.*strimzi.*
@@ -98,10 +98,10 @@ spec:
         resources:
           requests:
             memory: 8Gi
-            cpu: 8
+            cpu: 16
           limits:
             memory: 8Gi
-            cpu: 8
+            cpu: 16
         ports:
         - containerPort: 8080
       imagePullSecrets:
