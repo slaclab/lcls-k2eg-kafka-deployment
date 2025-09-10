@@ -1,14 +1,13 @@
----
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: source-code-volume
-# spec:
-#   accessModes:
-#     - ReadWriteMany
-#   resources:
-#     requests:
-#       storage: 30Gi
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: source-code-volume
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -51,14 +50,19 @@ spec:
         envFrom:
         - configMapRef:
             name: epics-env-config
-        # volumeMounts:
-        # - name: source-code-volume
-        #   mountPath: /sources
+        # enable source-code volume mount
+        volumeMounts:
+        - name: source-code-volume
+          mountPath: /sources
         resources:
+          requests:
+            memory: 4Gi
+            cpu: 4
           limits:
-            memory: 8Gi
-            cpu: 4000m
-      # volumes:
-      # - name: source-code-volume
-      #   persistentVolumeClaim:
-      #     claimName: source-code-volume
+            memory: 4Gi
+            cpu: 4
+      # attach the PVC as a volume
+      volumes:
+      - name: source-code-volume
+        persistentVolumeClaim:
+          claimName: source-code-volume
